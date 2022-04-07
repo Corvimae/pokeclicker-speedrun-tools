@@ -17,8 +17,11 @@ function enableAutoclicker() {
         return;
       }
 
-      // Pause while modals are open
-      if (document.querySelectorAll('.modal.show').length >= 1) {
+      // Pause while modals and tutorial popups are open
+      if (
+        document.querySelector('.modal.show') != undefined
+        || document.querySelector('.introjs-overlay') != undefined
+     ) {
         autoclickerStatusElem.textContent = `Auto-clicker paused, modal open...`;
         return;
       }
