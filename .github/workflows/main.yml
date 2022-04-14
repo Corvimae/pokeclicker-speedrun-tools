@@ -18,7 +18,14 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-
+      
+      - name: Get manifest version
+        id: manifest-version
+        uses: notiz-dev/github-action-json-property@release
+        with: 
+            path: 'manifest.v2.json'
+            prop_path: 'version'
+            
       - name: "Firefox: Rename manifest"
         run: mv manifest.v2.json manifest.json
         
@@ -42,5 +49,8 @@ jobs:
       - name: "Create Release"
         uses: softprops/action-gh-release@v1
         with:
+          tag_name: ${{steps.manifest-version.outputs.version}}
           files: |
-           ${{ steps.web-ext-build-chrome.outputs.target }}
+           ${{steps.web-ext-build-chrome.outputs.target}}
+           ${{steps.web-ext-build-firefox.outputs.target}}
+
