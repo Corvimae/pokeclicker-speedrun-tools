@@ -4,12 +4,6 @@ name: Build Artifacts
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -33,7 +27,6 @@ jobs:
         uses: kewisch/action-web-ext@v1
         with:
           cmd: build
-          source: src
           filename: "{name}-{version}-firefox.zip"
 
       - name: "Firefox: Upload Artifact"
@@ -49,7 +42,6 @@ jobs:
         uses: kewisch/action-web-ext@v1
         with:
           cmd: build
-          source: src
           filename: "{name}-{version}-chrome.zip"
 
       - name: "Chrome: Upload Artifact"
