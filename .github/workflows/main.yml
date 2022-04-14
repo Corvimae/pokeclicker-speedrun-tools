@@ -28,11 +28,6 @@ jobs:
         with:
           cmd: build
           filename: "{name}-{version}-firefox.zip"
-
-      - name: "Firefox: Upload Artifact"
-        uses: actions/upload-artifact@master
-        with:
-          path: ${{ steps.web-ext-build-firefox.outputs.target }}
           
       - name: "Chrome: Rename manifest"
         run: mv manifest.v3.json manifest.json
@@ -43,8 +38,9 @@ jobs:
         with:
           cmd: build
           filename: "{name}-{version}-chrome.zip"
-
-      - name: "Chrome: Upload Artifact"
-        uses: actions/upload-artifact@master
+      
+      - name: "Create Release"
+        uses: softprops/action-gh-release@v1
         with:
-          path: ${{ steps.web-ext-build-chrome.outputs.target }}
+          files: |
+           ${{ steps.web-ext-build-chrome.outputs.target }}
