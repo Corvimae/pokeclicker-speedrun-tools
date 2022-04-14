@@ -49,7 +49,7 @@ jobs:
       - name: "Create Release"
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{steps.manifest-version.outputs.version}}
+          tag_name: ${{steps.manifest-version.outputs.prop}}
           files: |
            ${{steps.web-ext-build-chrome.outputs.target}}
            ${{steps.web-ext-build-firefox.outputs.target}}
