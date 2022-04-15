@@ -15,12 +15,12 @@
     }
   ],
   "web_accessible_resources": [{
-	  "resources": [
+    "resources": [
       "scripts/tools/autoClicker.js",
       "scripts/tools/deleteGenericSave.js"
     ],
-	  "matches": ["*://*.pokeclicker.com/*"]
-	}],
+    "matches": ["*://*.pokeclicker.com/*"]
+  }],
   "host_permissions": [
     "*://*.pokeclicker.com/*"
   ]
