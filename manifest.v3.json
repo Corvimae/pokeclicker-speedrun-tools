@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Pokeclicker Speedrun Tools",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Adds various speedrun quality-of-life features to Pokeclicker.",
   "icons": {
     "48": "icons/icon-48.png",
@@ -15,9 +15,13 @@
     }
   ],
   "web_accessible_resources": [{
-	  "resources": ["scripts/script.js"],
-	  "matches": ["*://*.pokeclicker.com/*"]
-	}],
+    "resources": [
+      "scripts/tools/autoClicker.js",
+      "scripts/tools/speedrunSave.js",
+      "scripts/tools/speedrunTimer.js"
+    ],
+    "matches": ["*://*.pokeclicker.com/*"]
+  }],
   "host_permissions": [
     "*://*.pokeclicker.com/*"
   ]
