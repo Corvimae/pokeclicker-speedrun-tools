@@ -1,7 +1,7 @@
-function addDeleteGenericsButton() {
-  if (!document.querySelector('.delete-generic-runs')) {
+function addSpeedrunSaveButton() {
+  if (!document.querySelector('.start-speedrun-save')) {
     const button = document.createElement('label');
-    button.classList.add('btn', 'btn-success', 'col-md-4', 'col-xs-12', 'mx-1', 'delete-generic-runs');
+    button.classList.add('btn', 'btn-success', 'col-md-4', 'col-xs-12', 'mx-1', 'start-speedrun-save');
     button.textContent = 'New Speedrun';
     button.onclick = () => {
       Save.key = '_speedrun';
@@ -36,5 +36,5 @@ function addDeleteGenericsButton() {
 
 (() => {
   console.info('%c[Pokeclicker Speedrun Tools]', 'color: #9b59b6', 'Speedrun save loaded');
-  addDeleteGenericsButton();
+  addSpeedrunSaveButton();
 })();
