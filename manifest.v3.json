@@ -17,7 +17,8 @@
   "web_accessible_resources": [{
     "resources": [
       "scripts/tools/autoClicker.js",
-      "scripts/tools/speedrunSave.js"
+      "scripts/tools/speedrunSave.js",
+      "scripts/tools/speedrunTimer.js"
     ],
     "matches": ["*://*.pokeclicker.com/*"]
   }],

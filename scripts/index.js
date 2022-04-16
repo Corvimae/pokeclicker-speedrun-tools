@@ -3,6 +3,7 @@
   const tools = [
     'autoClicker',
     'speedrunSave',
+    'speedrunTimer',
   ];
 
   // Add each of our tools to the page

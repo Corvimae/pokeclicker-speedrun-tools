@@ -4,3 +4,7 @@
   right: 8px;
   cursor: pointer;
 }
+
+#speedrunTimerClock {
+  display: inline;
+}
