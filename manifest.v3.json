@@ -17,7 +17,7 @@
   "web_accessible_resources": [{
     "resources": [
       "scripts/tools/autoClicker.js",
-      "scripts/tools/deleteGenericSave.js"
+      "scripts/tools/speedrunSave.js"
     ],
     "matches": ["*://*.pokeclicker.com/*"]
   }],

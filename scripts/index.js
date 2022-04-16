@@ -2,7 +2,7 @@
   const b = typeof browser !== 'undefined' ? browser : chrome;
   const tools = [
     'autoClicker',
-    'deleteGenericSave',
+    'speedrunSave',
   ];
 
   // Add each of our tools to the page
