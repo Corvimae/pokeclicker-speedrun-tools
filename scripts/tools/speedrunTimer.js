@@ -27,6 +27,42 @@ const loadSpeedrunTimer = () => {
     };
   };
 
+  const ClearedRouteCheck = (routeNumber, region = 'kanto') => {
+    App.game.statistics.routeKills[region][routeNumber].subscribe((amt) => {
+      if (amt !== 10) return;
+
+      logInfo(`Cleared route ${routeNumber}!`);
+  
+      const now = new Date();
+      const time = new Date(now - startTime);
+
+      const table = document.getElementById('speedrunTimerTable');
+      const row = table.insertRow();
+      badgeCell = row.insertCell();
+      badgeCell.innerText = `Route ${routeNumber}`;
+      timeCell = row.insertCell();
+      timeCell.innerText = time.toISOString().substring(11, 23).replace(/^[0:]+/, '');
+    }); 
+  }
+
+  const ClearedDungeonCheck = (dungeonName) => {
+    App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(dungeonName)].subscribe((amt) => {
+      if (amt !== 1) return;
+
+      logInfo(`Cleared dungeon ${dungeonName}!`);
+  
+      const now = new Date();
+      const time = new Date(now - startTime);
+
+      const table = document.getElementById('speedrunTimerTable');
+      const row = table.insertRow();
+      badgeCell = row.insertCell();
+      badgeCell.innerText = dungeonName;
+      timeCell = row.insertCell();
+      timeCell.innerText = time.toISOString().substring(11, 23).replace(/^[0:]+/, '');
+    }); 
+  }
+
   const logInfo = (...args) => {
     console.info('%c[Pokeclicker Speedrun Tools]', 'color: #9b59b6', ...args);
   };
@@ -127,6 +163,13 @@ const loadSpeedrunTimer = () => {
       }
       requestAnimationFrame(updateTimer);
       
+      // If we are doing a tutorial run
+      if (SpeedrunTimerOptions.type === SpeedrunTimerType.tutorial) {
+        ClearedRouteCheck(1);
+        ClearedRouteCheck(22);
+        ClearedRouteCheck(2);
+        ClearedDungeonCheck('Viridian Forest');
+      }
     });
 
     injectMethodBefore(App.game.party, 'gainPokemonById', (id, shiny) => {
@@ -141,13 +184,13 @@ const loadSpeedrunTimer = () => {
         // Add one as we are running this method before we catch the pokemon
         const count = App.game.party.caughtPokemon.length + 1;
 
-        if (count % 20 == 0 || count == 151) {
+        if (count % 20 === 0 || count === 151) {
           logInfo(`Pokemon Caught: ${count}!`);
   
           const now = new Date();
           const time = new Date(now - startTime);
 
-          if (SpeedrunTimerOptions.type == SpeedrunTimerType.kanto_pokedex && count == 151) {
+          if (SpeedrunTimerOptions.type === SpeedrunTimerType.kanto_pokedex && count === 151) {
             endTime = now;
           }
   
@@ -159,7 +202,7 @@ const loadSpeedrunTimer = () => {
           timeCell.innerText = time.toISOString().substring(11, 23).replace(/^[0:]+/, '');
         }
       }
-    });  
+    });
 
     injectMethodBefore(App.game.badgeCase, 'gainBadge', badge => {
       // If run ended
@@ -173,11 +216,11 @@ const loadSpeedrunTimer = () => {
         const now = new Date();
         const time = new Date(now - startTime);
 
-        if (SpeedrunTimerOptions.type == SpeedrunTimerType.tutorial && badge == BadgeEnums.Boulder) {
+        if (SpeedrunTimerOptions.type === SpeedrunTimerType.tutorial && badge === BadgeEnums.Boulder) {
           endTime = now;
         }
 
-        if (SpeedrunTimerOptions.type == SpeedrunTimerType.kanto_champion && badge == BadgeEnums.Elite_KantoChampion) {
+        if (SpeedrunTimerOptions.type === SpeedrunTimerType.kanto_champion && badge === BadgeEnums.Elite_KantoChampion) {
           endTime = now;
         }
 
