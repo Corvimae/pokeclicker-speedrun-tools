@@ -40,6 +40,11 @@ function enableAutoclicker() {
         DungeonBattle.clickAttack();
       }
 
+      // Temporary
+      if (App.game.gameState == GameConstants.GameState.temporaryBattle && TemporaryBattleBattle.enemyPokemon() && TemporaryBattleBattle.enemyPokemon().health() > 0) {
+        TemporaryBattleBattle.clickAttack();
+      }
+
       autoclickerStatusElem.textContent = `Auto-clicker enabled at ${AUTOCLICKER_INTERVAL_MS}ms.`;
     }, AUTOCLICKER_INTERVAL_MS);
   }
